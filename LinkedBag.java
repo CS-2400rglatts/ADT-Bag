@@ -4,13 +4,11 @@ package com.bagadt;
  * @author Frank M. Carrano, Timothy M. Henry
  * @author Rebecca
  */
-import java.lang.*;
 
 public class LinkedBag<T> implements BagInterface<T> {
 
     private Node firstNode;
     private int numberOfEntries;
-    private T element;
     private boolean initialized;
     
 
@@ -233,7 +231,7 @@ public class LinkedBag<T> implements BagInterface<T> {
 
     }// end Node
 
-    
+
     public BagInterface<T> union(BagInterface<T> bag2)
     {
         BagInterface<T> b1 = this;
