@@ -1,6 +1,6 @@
 package com.bagadt;
 /**
- *   @author Rebecca Glatts
+ *   @author Rebecca Glatts, Yvonne Li, Jessica Ortega
  *   @author Frank M. Carrano, Timothy M. Henry
  */
 

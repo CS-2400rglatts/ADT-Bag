@@ -2,7 +2,7 @@ package com.bagadt;
 
 /**
  * @author Frank M. Carrano, Timothy M. Henry
- * @author Rebecca
+ * @author Rebecca Glatts,
  */
 
 public class LinkedBag<T> implements BagInterface<T> {
@@ -43,34 +43,30 @@ public class LinkedBag<T> implements BagInterface<T> {
         return result;
     } // end remove
 
+   /** Tests whether this bag contains a given entry.
+       @param anEntry  The entry to locate.
+    @return  True if the bag contains anEntry, or false otherwise.
+    */
+	public boolean contains(T anEntry)
+	{
+      boolean found = false;
+      Node currentNode = firstNode;
+      
+      while (!found && (currentNode != null))
+      {
+         if (anEntry.equals(currentNode.data))
+            found = true;
+         else
+            currentNode = currentNode.next;
+      } // end while
+      return found;
+   } // end contains
 
-       /**
-         Tests whether this bag contains a given entry.
-         @param anEntry The entry to locate.
-         @return true if the bag contains anEntry, or false otherwise.
+
+    /**  Locates a given entry within this bag.
+     * @param anEntry The entry to get the reference to.
+     * @return a reference to the node containing the entry, if located, or null otherwise
      */
-     public boolean contains(T anEntry)
-     {
-         boolean found = false;
-         Node currentNode = firstNode;
-         while (!found && (currentNode != null))
-         {
-             if (anEntry.equals(currentNode.data))
-             {
-                 found = true;
-             }
-             else
-             {
-                 currentNode = currentNode.next;
-             }
-         }
-         return found;
-     }
-
-
-    // Locates a given entry within this bag.
-    // Returns a reference to the node containing the // entry, if located, or null
-    // otherwise.
     private Node getReferenceTo(T anEntry) {
         boolean found = false;
         Node currentNode = firstNode;
@@ -171,7 +167,7 @@ public class LinkedBag<T> implements BagInterface<T> {
              //Replace located entry with entry in first node
              //then remove first node and adjust numberOfEntries.
             nodeN.data = firstNode.data;
-             firstNode = firstNode.next;
+            firstNode = firstNode.next;
             numberOfEntries--;
             result = true;
          }
@@ -232,6 +228,11 @@ public class LinkedBag<T> implements BagInterface<T> {
     }// end Node
 
 
+     /**
+     * Combines all of the items in the current bag and the passed bag
+     * @param bag2 The bag that is combined with the current bag
+     * @return a LinkedBag that contains all of the entries in the current bag and the passed bag
+     */
     public BagInterface<T> union(BagInterface<T> bag2)
     {
         BagInterface<T> b1 = this;
@@ -264,78 +265,41 @@ public class LinkedBag<T> implements BagInterface<T> {
 
     }//end union
 
-
+    /**
+     * Puts items that occur in both bags into a third bag
+     * @param bag2 The bag that is used to compare which items overlap
+     * @return a LinkedBag that contains items that occur in both bags
+     */
     public BagInterface<T> intersection(BagInterface<T> bag2)
-    { //sanitize user input; account for null
+    { 
         BagInterface<T> b1 = this;
         BagInterface<T> b2 = bag2;
-        BagInterface<T> b3 = new ResizeableArrayBag<T>();
+        BagInterface<T> b3 = new LinkedBag<T>();
 
-        if (b1.isEmpty() || b2.isEmpty()) {
+         if (b1.isEmpty() || b2.isEmpty()) {
             return b3;
-        } // end if
+        }
 
         T[]bg1 = this.toArray();
         T[] bg2 = b2.toArray();
 
-        for (T i : bg1) {
-            for (T j : bg2) {
-                if (i == j) {
-                    b3.add(i);
-                }
+        for (T elem : bg1) {
+            if(b2.contains(elem)){
+                b3.add(elem);
+                b2.removeEntry(elem);
+                
             } // end for
         } // end for
         return b3;
-    }//end union
 
-/*
-public BagInterface<T> intersection(BagInterface<T> bag2)
-    { //sanitize user input; account for null
-        BagInterface<T> b3 = new LinkedBag<T>();
-        if (b1.isEmpty() || b2.isEmpty()) { 
-            return null; 
-        } //end if
-        int index = 0;
-        Node currentNode = firstNode;
-        while (index < this.numberOfEntries)
-        {
-            if (bag2.contains(currentNode.data))
-                b3.add(currentNode.data);
-            index++;
-            currentNode = currentNode.next;
-        }
-        return b3;
+        
     }//end intersection
-*/
-
-/*
-//this might work
-public BagInterface<T> difference(BagInterface<T> bag2)
- {
-  BagInterface<T> newBag = new LinkedBag<T>();
-  int index = 0;
-  Node currentNode = firstNode;
-
-  while (index < this.numberOfEntries)
-  {
-   int thisFrequency = this.getFrequencyOf(currentNode.data); 
-   int anotherFrequency = bag2.getFrequencyOf(currentNode.data); 
-   if ((thisFrequency > anotherFrequency) && !newBag.contains(currentNode.data))
-   {      
-    for (int i = thisFrequency - anotherFrequency; i > 0 ; i--) 
-    {
-     newBag.add(currentNode.data); 
-    }
-   }
-   index++;
-   currentNode = currentNode.next;
-
-  }
-  return newBag;
- }
-
- */
-
+   
+    /**
+     * Subtracts objects that occur in bag2 from the current bag and 
+     * @param bag2 The bag that is used to subtract from the current bag
+     * @return a LinkedBag that contains entries left over after subtraction
+     */
     public BagInterface<T> difference(BagInterface<T> bag2)
     {
         BagInterface<T> b1 = this;
@@ -352,21 +316,16 @@ public BagInterface<T> difference(BagInterface<T> bag2)
 
         T[] bg1 = this.toArray();
         T[] bg2 = b2.toArray();
-
-        T[] mine = this.toArray();
-        for (T elem : mine) {
-            b3.add(elem);
-        }
-        T[] others = bag2.toArray();
-        for (T elem : others) {
-            if (b3.contains(elem)) {
-                b3.removeEntry(elem);
+        
+        for (T elem : bg1) {
+            if(!b2.contains(elem)){
+                b3.add(elem);
+              
+            } else {
+                b2.removeEntry(elem);
             }
-        }
+        } // end for
         return b3;
-
-    }// end difference
-
-
+    } //end difference
 
 }// end LinkedBag

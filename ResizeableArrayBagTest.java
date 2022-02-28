@@ -1,3 +1,4 @@
+
 package com.example;
 /**
  *
@@ -8,7 +9,6 @@ package com.example;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -382,7 +382,7 @@ public class ResizeableArrayBagTest {
         BagInterface < String > expected = new ResizeableArrayBag < >();
         
         bag1.add("1");
-        bag1.add("5");
+        bag1.add("5"); 
         bag2.add("1");
         BagInterface<String> commonItems = bag1.intersection(bag2);
         Object[] array1 = new Object[8];

@@ -4,11 +4,9 @@ import java.util.Arrays;
 
 /**
  * @author Frank M. Carrano, Timothy M. Henry
- * @author Rebecca Glatts
+ * @author Rebecca Glatts, 
  */
 
- //dont add quick fix things - when i added yvonnes implementation it used 
- // a different remove so i had to specify and now its all messed up
 public class ResizeableArrayBag<T> implements BagInterface<T> {
 
     private T[] bag;
@@ -92,9 +90,9 @@ public class ResizeableArrayBag<T> implements BagInterface<T> {
     } // end clear
 
 
-    // Locates a given entry within the array bag.
-    // Returns the index of the entry, if located, or -1 otherwise.
-    // Precondition: checkIntegrity has been called.
+    /**  Locates a given entry within the array bag.
+     Returns the index of the entry, if located, or -1 otherwise.
+     Precondition: checkIntegrity has been called.*/
     private int getIndexOf(T anEntry) {
         int where = -1;
         boolean found = false;
@@ -126,11 +124,10 @@ public class ResizeableArrayBag<T> implements BagInterface<T> {
     } // end remove
 
 
-    // Removes and returns the entry at a given index within the array.
-    // If no such entry exists, returns null.
-    // Precondition: 0 <= givenIndex < numberOfEntries.
-    // Precondition: checkInitialization has been called.
-
+    /** Removes and returns the entry at a given index within the array.
+     * If no such entry exists, returns null.
+     * Precondition: 0 <= givenIndex < numberOfEntries.
+     * Precondition: checkInitialization has been called*/
     public T removeEntry(int givenIndex) {
         T result = null;
 
@@ -173,7 +170,8 @@ public class ResizeableArrayBag<T> implements BagInterface<T> {
 
     
 
-    // Returns true if this bag is full, or false if not.
+    /**Returns true if this bag is full, or false if not.
+     */
     private boolean isArrayFull() {
         return numberOfEntries >= bag.length;
     } // end isArrayFull
@@ -197,7 +195,7 @@ public class ResizeableArrayBag<T> implements BagInterface<T> {
 
     } // end add
 
-    // Throws an exception if the client requests a capacity that is too large.
+    /**  Throws an exception if the client requests a capacity that is too large.*/
     private void checkCapacity(int capacity) {
         if (capacity > maxCapacity)
             throw new IllegalStateException("Attempt to create a bag whose "
@@ -205,18 +203,24 @@ public class ResizeableArrayBag<T> implements BagInterface<T> {
                     + "maximum of " + maxCapacity);
     }// end checkCapacity
 
-    // Doubles the size of the array bag.
-    // Precondition: checkIntegrity has been called.
+    /**Doubles the size of the array bag.
+     Precondition: checkIntegrity has been called.*/
     private void doubleCapacity() {
         int newLength = 2 * bag.length;
         checkCapacity(newLength);
         bag = Arrays.copyOf(bag, newLength);
     }// end doubleCapacity
 
+
+     /**
+     * Combines all of the items in the current bag and the passed bag
+     * @param bag2 The bag that is combined with the current bag
+     * @return a ResizebleArrayBag that contains all of the entries in the current bag and the passed bag
+     */
     public BagInterface<T> union(BagInterface<T> bag2) {
         BagInterface<T> b1 = this;
         BagInterface<T> b2 = bag2;
-        BagInterface<T> b3 = new LinkedBag<T>();
+        BagInterface<T> b3 = new ResizeableArrayBag<T>();
         
         T[] bg1 = this.toArray();
         T[] bg2 = b2.toArray();
@@ -243,29 +247,41 @@ public class ResizeableArrayBag<T> implements BagInterface<T> {
         return b3;
     }// end union
 
-    public BagInterface<T> intersection(BagInterface<T> bag2) {
+    /**
+     * Puts items that occur in both bags into a third bag
+     * @param bag2 The bag that is used to compare which items overlap
+     * @return a ResizableArrayBag that contains items that occur in both bags
+     */
+    public BagInterface<T> intersection(BagInterface<T> bag2)
+    { 
         BagInterface<T> b1 = this;
         BagInterface<T> b2 = bag2;
         BagInterface<T> b3 = new ResizeableArrayBag<T>();
 
         if (b1.isEmpty() || b2.isEmpty()) {
             return b3;
-        } // end if
+        }
 
         T[]bg1 = this.toArray();
         T[] bg2 = b2.toArray();
 
-        for (T i : bg1) {
-            for (T j : bg2) {
-                if (i == j) {
-                    b3.add(i);
-                }
+        for (T elem : bg1) {
+            if(bag2.contains(elem)){
+                b3.add(elem);
+                bag2.removeEntry(elem);
+                
             } // end for
         } // end for
         return b3;
-    }// end intersection
+    }//end intersection
 
-    public BagInterface<T> difference(BagInterface<T> bag2) {
+    /**
+     * Subtracts objects that occur in bag2 from the current bag and 
+     * @param bag2 The bag that is used to subtract from the current bag
+     * @return a ResizeableArrayBag that contains entries left over after subtraction
+     */
+    public BagInterface<T> difference(BagInterface<T> bag2)
+    {
         BagInterface<T> b1 = this;
         BagInterface<T> b2 = bag2;
         BagInterface<T> b3 = new ResizeableArrayBag<T>();
@@ -281,20 +297,24 @@ public class ResizeableArrayBag<T> implements BagInterface<T> {
         T[] bg1 = this.toArray();
         T[] bg2 = b2.toArray();
 
-        T[] mine = this.toArray();
-        for (T elem : mine) {
-            b3.add(elem);
-        }
-        T[] others = bag2.toArray();
-        for (T elem : others) {
-            if (b3.contains(elem)) {
-                b3.removeEntry(elem);
+        
+//wait until i upload ill give you the go-ahead
+//okay lmk when you come back :)
+        //for (T i : bg1){
+        //    b3
+            
+       // }
+        /*
+        for (T elem : bg1) {
+            if(!b2.contains(elem)){
+                b3.add(elem);
+                b2.removeEntry(elem);
+            } else {
+               b2.removeEntry(elem);
             }
-        }
+        } // end for
         return b3;
-
-    }// end difference
-
+    }*/
 
 
 } // end ResizeableArrayBag
