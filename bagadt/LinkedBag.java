@@ -1,10 +1,12 @@
 package com.bagadt;
 
 /**
+ * Implementation of BagInterface using a linked list
+ * 
  * @author Frank M. Carrano, Timothy M. Henry
  * @author Rebecca Glatts, Yvonne Li, Jessica Ortega
- */
-
+ * 
+ * */
 public class LinkedBag<T> implements BagInterface<T> {
 
     private Node firstNode;
