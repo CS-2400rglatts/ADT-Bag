@@ -5,11 +5,11 @@ import com.bagadt.LinkedBag;
 import com.bagadt.ResizeableArrayBag;
 import java.util.Arrays;
 
-/**
+/**Public user interface for using Bag ADT bags
  *
  * @author Rebecca Glatts
- */
-
+ * 
+ * */
 public class bagDriver {
     public static void main(String[] args) {
         BagInterface<String> linkedBag1 = new LinkedBag<>();
