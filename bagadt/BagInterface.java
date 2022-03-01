@@ -1,10 +1,10 @@
 package com.bagadt;
-/**
- *   @author Rebecca Glatts, Yvonne Li, Jessica Ortega
+/** An interface that describes the operations of a bag of objects.
+ * 
+ * @author Rebecca Glatts, Yvonne Li, Jessica Ortega
  *   @author Frank M. Carrano, Timothy M. Henry
- */
-
-/** An interface that describes the operations of a bag of objects. */
+ *   
+ *  */
 public interface BagInterface<T> {
     /**
      * Gets the current number of entries in this bag.
