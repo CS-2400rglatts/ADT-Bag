@@ -5,10 +5,12 @@ Worked on union(), difference(), intersection() methods, created unit tests usin
 
 
 Yvonne Li
+Worked on intersection(), difference methods()
+
 Jessica Ortega
 
 We implemented our test classes using Junit4 unit testing framework.
 
-Screencast link:
+Screencast link:https://youtu.be/_KZzoRrLayg
 
 Javadoc start page: file:///C:/Users/Rebecca/Documents/NetBeansProjects/Bag/index.html
