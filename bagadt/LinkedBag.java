@@ -238,29 +238,35 @@ public class LinkedBag<T> implements BagInterface<T> {
      */
     public BagInterface<T> union(BagInterface<T> bag2) {
         checkIntegrity();
+        //clones original bags so they aren't touched
         BagInterface<T> b1 = this;
         BagInterface<T> b2 = bag2;
         BagInterface<T> b3 = new LinkedBag<T>();
 
         T[] bg1 = this.toArray();
         T[] bg2 = b2.toArray();
-
+        
+        //if both are empty return an empty bag
         if (b1.isEmpty() && b2.isEmpty()) {
-            return null;
+            return b3;
         } // end if
+        //if b2 is empty return b3 that is just filled with bag1
         else if (b2.isEmpty()) {
             b3 = b1;
             return b3;
         } // end else if
+        //if b1 is empty return b3 that is just filled with bag2
         else if (b1.isEmpty()) {
             b3 = b2;
             return b3;
         } // end else if
-
+    
+        //add each element in bg1 to bag 3
         for (T i : bg1) {
             b3.add(i);
 
         } // end for
+        //add each element in bg2 to bag3
         for (T i : bg2) {
             b3.add(i);
         }
@@ -276,17 +282,21 @@ public class LinkedBag<T> implements BagInterface<T> {
      */
     public BagInterface<T> intersection(BagInterface<T> bag2) {
         checkIntegrity();
+        
+        //clone bags
         BagInterface<T> b1 = this;
         BagInterface<T> b2 = bag2;
         BagInterface<T> b3 = new LinkedBag<T>();
-
+        
+        //if either are empty return bag 3 with nothing because nothing overlaps
         if (b1.isEmpty() || b2.isEmpty()) {
             return b3;
         }
 
         T[] bg1 = this.toArray();
         T[] bg2 = b2.toArray();
-
+        
+        //for each element in bg1, if b2 contains the element, add the element to b3 and remove it from b2
         for (T elem : bg1) {
             if (b2.contains(elem)) {
                 b3.add(elem);
@@ -306,21 +316,25 @@ public class LinkedBag<T> implements BagInterface<T> {
      */
     public BagInterface<T> difference(BagInterface<T> bag2) {
         checkIntegrity();
+        
+        //clone bags
         BagInterface<T> b1 = this;
         BagInterface<T> b2 = bag2;
         BagInterface<T> b3 = new ResizeableArrayBag<T>();
-
+        
+        //if b2 is empty return b1 because nothing will be subtracted from it
         if (b2.isEmpty()) {
             b3 = b1;
             return b3;
         } // end else if
+        //return b3 with nothing if b1 is empty
         else if (b1.isEmpty()) {
-            b3 = b2;
             return b3;
         } // end else if
         T[] bg1 = this.toArray();
         T[] bg2 = b2.toArray();
-
+        
+        //for each element in bg1, if b2 does not contain it, add it to b3, else remove it from b2 because it is no longer needed
         for (T elem : bg1) {
             if (!b2.contains(elem)) {
                 b3.add(elem);
