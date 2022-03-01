@@ -15,3 +15,4 @@ We implemented our test classes using Junit4 unit testing framework.
 Screencast link: [https://youtu.be/_KZzoRrLayg](url)
 
 Javadoc start page: [https://cs-2400rglatts.github.io/ADT-Bag/Bag/com/bagadt/package-summary.html](url)
+[https://cs-2400rglatts.github.io/ADT-Bag/](url)
