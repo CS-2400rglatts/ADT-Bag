@@ -2,11 +2,11 @@ package com.bagadt;
 
 import java.util.Arrays;
 
-/**
+/**Implementation of BagInterface using resizable arrays
+ * 
  * @author Frank M. Carrano, Timothy M. Henry
  * @author Rebecca Glatts, Yvonne Li, Jessica Ortega
- */
-
+ * */
 public class ResizeableArrayBag<T> implements BagInterface<T> {
 
     private T[] bag;
