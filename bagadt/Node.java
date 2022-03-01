@@ -1,10 +1,9 @@
 package com.bagadt;
-
-/**
- *
+/**Creates nodes for LinkedBag
+ * 
  * @author Frank M. Carrano, Timothy M. Henry
- */
-
+ * 
+ *  */
 public class Node<T> {
     private T data;
     private Node<T> next;
