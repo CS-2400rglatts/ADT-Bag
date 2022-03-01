@@ -1,16 +1,17 @@
 # ADT-Bag
 
 Rebecca Glatts
-Worked on union(), difference(), intersection() methods, created unit tests using Junit for LinkedBag and ResizeableArrayBag, generated javadoc, did O(n) document
-
+Worked on union(), difference(), intersection() methods, created unit tests using Junit for LinkedBag and ResizeableArrayBag, 
+generated javadoc and created html page, did O(n) document
 
 Yvonne Li
 Worked on intersection(), difference methods()
 
 Jessica Ortega
 
+Implemented extra features:
 We implemented our test classes using Junit4 unit testing framework.
 
-Screencast link:https://youtu.be/_KZzoRrLayg
+Screencast link: [https://youtu.be/_KZzoRrLayg](url)
 
-Javadoc start page: file:///C:/Users/Rebecca/Documents/NetBeansProjects/Bag/index.html
+Javadoc start page: [https://cs-2400rglatts.github.io/ADT-Bag/Bag/com/bagadt/package-summary.html](url)
