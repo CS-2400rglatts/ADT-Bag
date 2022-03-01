@@ -1,10 +1,6 @@
 
 package com.example;
-/**
- *
- * @author Rebecca Glatts
- * Tests union, intersection, and difference methods within ResizeableArrayBag
- */
+
 
 
 import org.junit.Test;
@@ -18,7 +14,11 @@ import com.bagadt.BagInterface;
 import com.bagadt.LinkedBag;
 import com.bagadt.ResizeableArrayBag;
 
-
+/**Tests union, intersection, and difference methods within ResizeableArrayBag
+ *
+ * @author Rebecca Glatts
+ * 
+ */
 public class ResizeableArrayBagTest {
     
     /** Tests method union with duplicants in each bag in the class ResizeableArrayBag 
